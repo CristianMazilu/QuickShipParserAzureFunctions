@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33403.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickShipParser", "QuickShipParser.csproj", "{EF181D9D-5AEA-4C25-8ED2-4AAB69458C05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickShipParserTests", "..\QuickShipParserTests\QuickShipParserTests.csproj", "{1317D74F-D699-4A3A-8551-A85154F657A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F52110FE-826C-478E-9BFE-CAA5BDC03D02}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF181D9D-5AEA-4C25-8ED2-4AAB69458C05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF181D9D-5AEA-4C25-8ED2-4AAB69458C05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF181D9D-5AEA-4C25-8ED2-4AAB69458C05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF181D9D-5AEA-4C25-8ED2-4AAB69458C05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1317D74F-D699-4A3A-8551-A85154F657A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1317D74F-D699-4A3A-8551-A85154F657A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1317D74F-D699-4A3A-8551-A85154F657A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1317D74F-D699-4A3A-8551-A85154F657A8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5665F33-5097-46D6-BED8-C0C00B9066F6}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,80 @@
+﻿{
+  "modelName": "Mag meters",
+  "baseModel": "8705",
+  "elements": [
+    {
+      "codeName": "Base",
+      "length": 4,
+      "codes": [
+        {
+          "code": "8705",
+          "description": "Magnetic Flowmeter Sensor - Flanged"
+        }
+      ]
+    },
+    {
+      "codeName": "Lining Material",
+      "length": 1,
+      "codes": [
+        {
+          "code": "T",
+          "description": "PTFE"
+        }
+      ]
+    },
+    {
+      "codeName": "Electrode Material",
+      "length": 1,
+      "codes": [
+        {
+          "code": "S",
+          "description": "316L Stainless Steel"
+        },
+        {
+          "code": "H",
+          "description": "Nickel Alloy 276 (UNS N10276)"
+        }
+      ]
+    },
+    {
+      "codeName": "Electrode Type",
+      "length": 1,
+      "codes": [
+        {
+          "code": "A",
+          "description": "2 Measurement electrodes - Standard"
+        },
+        {
+          "code": "E",
+          "description": "2 Measurement plus 1 Grounding Electrode - Standard"
+        }
+      ]
+    },
+    {
+      "codeName": "Line Size",
+      "length": 3,
+      "codes": [
+        {
+          "code": "010",
+          "description": "1 inch (25 mm)"
+        },
+        {
+          "code": "015",
+          "description": "1.5 inch (40 mm)"
+        },
+        {
+          "code": "020",
+          "description": "2 inch (50 mm)"
+        },
+        {
+          "code": "030",
+          "description": "3 inch (80 mm)"
+        },
+        {
+          "code": "040",
+          "description": "4 inch (100 mm)"
+        }
+      ]
+    }
+  ]
+}
