@@ -81,6 +81,41 @@
           "optional": false
         }
       ]
+    },
+    {
+      "codeName": "Flange Type and Material",
+      "codes": [
+        {
+          "code": "C",
+          "description": "Slip-On, Raised Face, Carbon Steel",
+          "optional": true
+        },
+        {
+          "code": "S",
+          "description": "Slip-On, Raised Face, Carbon Steel",
+          "optional": true
+        },
+        {
+          "code": "P",
+          "description": "Slip-On, Raised-Face, 316/316L Stainless Steel",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "codeName": "Flange Rating",
+      "codes": [
+        {
+          "code": "H",
+          "description": "Slip-On, Raised Face, Carbon Steel",
+          "optional": false
+        },
+        {
+          "code": "1",
+          "description": "Slip-On, Raised Face, Carbon Steel",
+          "optional": false
+        }
+      ]
     }
   ]
 }

@@ -34,11 +34,27 @@ namespace QuickShipParser
             public List<CodeDescription> Codes { get; set; }
         }
 
-        public class CodeDescription
+        public class CodeDescription : IPattern
         {
             public string Code { get; set; }
             public string Description { get; set; }
             public bool Optional { get; set; }
+
+            public IMatch Match(string text)
+            {
+                if (Optional)
+                {
+                    var pattern = new OptionalPattern(new JsonText(Code));
+                    var match = pattern.Match(text);
+                    return new SuccessMatch(match.RemainingText());
+                }
+                else
+                {
+                    var pattern = new JsonText(Code);
+                    var match = pattern.Match(text);
+                    return new SuccessMatch(match.RemainingText());
+                }
+            }
         }
     }
 }

@@ -12,20 +12,14 @@ namespace QuickShipParser.Facts
     {
         private ModelStructure SetUpModelStructure()
         {
-            string json = @"
+            var sourceFilePath = "D:\\Projects\\2023.11.18 QuickShipParserAzureFunctions\\QuickShipParser\\ModelConfigurations\\MagCodeComposition.json";
+            if (!File.Exists(sourceFilePath))
             {
-                ""modelName"": ""Mag meters"",
-                ""baseModel"": ""8705"",
-                ""elements"": [
-                    {
-                        ""codeName"": ""Base"",
-                        ""length"": 4,
-                        ""codes"": [
-                            { ""code"": ""8705"", ""description"": ""Magnetic Flowmeter Sensor - Flanged"" }
-                        ]
-                    }
-                ]
-            }";
+                throw new FileNotFoundException(sourceFilePath);
+            }
+
+            string json = File.ReadAllText(sourceFilePath);
+
             return ModelStructure.FromJson(json);
         }
 
@@ -35,7 +29,7 @@ namespace QuickShipParser.Facts
             var modelStructure = SetUpModelStructure();
             var parser = new ModelParser(modelStructure);
 
-            var result = parser.Match("8705"); // Replace with an appropriate valid model string
+            var result = parser.Match("8705THA010P1"); // Replace with an appropriate valid model string
             Assert.IsFalse(result.Success());
         }
 
@@ -57,6 +51,7 @@ namespace QuickShipParser.Facts
 
             var result = parser.Match("8705Partial"); // A partially valid string
             Assert.IsFalse(result.Success());
+            Assert.AreEqual("8705Partial", result.RemainingText());
         }
 
         [TestMethod]
@@ -75,9 +70,93 @@ namespace QuickShipParser.Facts
             var modelStructure = SetUpModelStructure();
             var parser = new ModelParser(modelStructure);
 
-            var result = parser.Match("8705"); // Replace with an appropriate valid model string
-            Assert.AreEqual("8705", result.RemainingText()); // Assuming the whole string is used
+            var result = parser.Match("8705THA010P12"); // Replace with an appropriate valid model string
+            Assert.AreEqual("8705THA010P12", result.RemainingText()); // Assuming the whole string is used
             Assert.IsFalse(result.Success());
+        }
+
+        [TestMethod]
+        public void Match_ValidCodeWithDescription_OptionalFalse_ReturnsSuccess()
+        {
+            var modelStructure = SetUpModelStructure();
+            var element = modelStructure.Elements.FirstOrDefault(e => e.CodeName == "Electrode Type");
+            var codeDescription = element?.Codes.FirstOrDefault(c => c.Code == "E" && !c.Optional);
+
+            var matchResult = codeDescription?.Match("E");
+
+            Assert.IsNotNull(matchResult);
+            Assert.IsTrue(matchResult.Success());
+            Assert.AreEqual("", matchResult.RemainingText());
+        }
+
+        [TestMethod]
+        public void Match_ValidCodeWithDescriptionWithRemaininText_OptionalTrue_ReturnsSuccess()
+        {
+            var modelStructure = SetUpModelStructure();
+            var element = modelStructure.Elements.FirstOrDefault(e => e.CodeName == "Flange Rating");
+            var codeDescription = element?.Codes.FirstOrDefault(c => c.Code == "H" && !c.Optional);
+
+            var matchResult = codeDescription?.Match("H23");
+
+            Assert.IsNotNull(matchResult);
+            Assert.IsTrue(matchResult.Success());
+            Assert.AreEqual("23", matchResult.RemainingText());
+        }
+
+        [TestMethod]
+        public void Match_ValidCodeWithDescriptionWithoutRemaininText_OptionalTrue_ReturnsSuccess()
+        {
+            var modelStructure = SetUpModelStructure();
+            var element = modelStructure.Elements.FirstOrDefault(e => e.CodeName == "Flange Rating");
+            var codeDescription = element?.Codes.FirstOrDefault(c => c.Code == "H" && !c.Optional);
+
+            var matchResult = codeDescription?.Match("H");
+
+            Assert.IsNotNull(matchResult);
+            Assert.IsTrue(matchResult.Success());
+            Assert.AreEqual("", matchResult.RemainingText());
+        }
+
+        [TestMethod]
+        public void Match_ValidCodeWithDescriptionWithoutRemaininText_OptionalFalse_ReturnsSuccess()
+        {
+            var modelStructure = SetUpModelStructure();
+            var element = modelStructure.Elements.FirstOrDefault(e => e.CodeName == "Line Size");
+            var codeDescription = element?.Codes.FirstOrDefault(c => c.Code == "010" && !c.Optional);
+
+            var matchResult = codeDescription?.Match("010");
+
+            Assert.IsNotNull(matchResult);
+            Assert.IsTrue(matchResult.Success());
+            Assert.AreEqual("", matchResult.RemainingText());
+        }
+
+        [TestMethod]
+        public void Match_ValidCodeWithDescriptionWithRemaininText_OptionalFalse_ReturnsSuccess()
+        {
+            var modelStructure = SetUpModelStructure();
+            var element = modelStructure.Elements.FirstOrDefault(e => e.CodeName == "Line Size");
+            var codeDescription = element?.Codes.FirstOrDefault(c => c.Code == "020" && !c.Optional);
+
+            var matchResult = codeDescription?.Match("02023");
+
+            Assert.IsNotNull(matchResult);
+            Assert.IsTrue(matchResult.Success());
+            Assert.AreEqual("23", matchResult.RemainingText());
+        }
+
+        [TestMethod]
+        public void Match_ValidCodeWithDescriptionWithRemaininTextNoOption_OptionalTrue_ReturnsSuccess()
+        {
+            var modelStructure = SetUpModelStructure();
+            var element = modelStructure.Elements.FirstOrDefault(e => e.CodeName == "Flange Type and Material");
+            var codeDescription = element?.Codes.FirstOrDefault(c => c.Code == "S" && c.Optional);
+
+            var matchResult = codeDescription?.Match("02023");
+
+            Assert.IsNotNull(matchResult);
+            Assert.IsTrue(matchResult.Success());
+            Assert.AreEqual("02023", matchResult.RemainingText());
         }
     }
 }
