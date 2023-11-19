@@ -24,17 +24,16 @@ namespace QuickShipParser
             ILogger log)
         {
             Exception exception = null;
-
             string? model = req.Query["model"];
 
             if (model == null)
             {
                 var errorResponse = new ReturnStructure(null, false, null, "Model parameter is missing.");
-                return new BadRequestObjectResult(JsonConvert.SerializeObject(errorResponse));
+                return new BadRequestObjectResult(
+                    new ReturnStructure(null, false, null, "Model parameter is missing.").JsonSerialized());
             }
 
             IMatch result = new FailedMatch("Base model not found.");
-
             try
             {
                 log.LogInformation("C# HTTP trigger function processed a request.");
@@ -80,13 +79,11 @@ namespace QuickShipParser
             if (exception != null)
             {
                 return new BadRequestObjectResult(
-                    JsonConvert.SerializeObject(
-                        new ReturnStructure(model, result?.Success(), result?.RemainingText(), exception.Message)));
+                        new ReturnStructure(model, result?.Success(), result?.RemainingText(), exception.Message).JsonSerialized());
             }
 
             return new OkObjectResult(
-                JsonConvert.SerializeObject(
-                    new ReturnStructure(model, result?.Success(), result?.RemainingText())));
+                    new ReturnStructure(model, result?.Success(), result?.RemainingText()).JsonSerialized());
         }
 
         public class ReturnStructure
@@ -102,6 +99,18 @@ namespace QuickShipParser
                 QuickShipValid = quickShipValid;
                 QuickShipInvalidPart = quickShipInvalidPart;
                 ExceptionMessage = exceptionMessage;
+            }
+
+            public string JsonSerialized()
+            {
+                var serializerSettings = new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented, // For pretty printing
+                    NullValueHandling = NullValueHandling.Ignore // To ignore null values
+                };
+
+                return JsonConvert.SerializeObject(this, serializerSettings);
+
             }
         }
     }
