@@ -4,116 +4,107 @@
   "elements": [
     {
       "codeName": "Base",
+      "optional": false,
       "codes": [
         {
           "code": "8705",
-          "description": "Magnetic Flowmeter Sensor - Flanged",
-          "optional": false
+          "description": "Magnetic Flowmeter Sensor - Flanged"
         }
       ]
     },
     {
       "codeName": "Lining Material",
+      "optional": false,
       "codes": [
         {
           "code": "T",
-          "description": "PTFE",
-          "optional": false
+          "description": "PTFE"
         }
       ]
     },
     {
       "codeName": "Electrode Material",
+      "optional": false,
       "codes": [
         {
           "code": "S",
-          "description": "316L Stainless Steel",
-          "optional": false
+          "description": "316L Stainless Steel"
         },
         {
           "code": "H",
-          "description": "Nickel Alloy 276 (UNS N10276)",
-          "optional": false
+          "description": "Nickel Alloy 276 (UNS N10276)"
         }
       ]
     },
     {
       "codeName": "Electrode Type",
+      "optional": false,
       "codes": [
         {
           "code": "A",
-          "description": "2 Measurement electrodes - Standard",
-          "optional": false
+          "description": "2 Measurement electrodes - Standard"
         },
         {
           "code": "E",
-          "description": "2 Measurement plus 1 Grounding Electrode - Standard",
-          "optional": false
+          "description": "2 Measurement plus 1 Grounding Electrode - Standard"
         }
       ]
     },
     {
       "codeName": "Line Size",
+      "optional": false,
       "codes": [
         {
           "code": "010",
-          "description": "1 inch (25 mm)",
-          "optional": false
+          "description": "1 inch (25 mm)"
         },
         {
           "code": "015",
-          "description": "1.5 inch (40 mm)",
-          "optional": false
+          "description": "1.5 inch (40 mm)"
         },
         {
           "code": "020",
-          "description": "2 inch (50 mm)",
-          "optional": false
+          "description": "2 inch (50 mm)"
         },
         {
           "code": "030",
-          "description": "3 inch (80 mm)",
-          "optional": false
+          "description": "3 inch (80 mm)"
         },
         {
           "code": "040",
-          "description": "4 inch (100 mm)",
-          "optional": false
+          "description": "4 inch (100 mm)"
         }
       ]
     },
     {
       "codeName": "Flange Type and Material",
+      "optional": true,
       "codes": [
         {
           "code": "C",
-          "description": "Slip-On, Raised Face, Carbon Steel",
-          "optional": true
+          "description": "Slip-On, Raised Face, Carbon Steel"
         },
         {
           "code": "S",
-          "description": "Slip-On, Raised Face, Carbon Steel",
-          "optional": true
+          "description": "Slip-On, Raised Face, Carbon Steel"
         },
         {
           "code": "P",
-          "description": "Slip-On, Raised-Face, 316/316L Stainless Steel",
-          "optional": true
+          "description": "Slip-On, Raised-Face, 316/316L Stainless Steel"
         }
       ]
     },
     {
       "codeName": "Flange Rating",
+      "optional": false,
       "codes": [
         {
           "code": "H",
-          "description": "Slip-On, Raised Face, Carbon Steel",
-          "optional": false
+          "description": "Slip-On, Raised Face, Carbon Steel"
         },
         {
           "code": "1",
-          "description": "Slip-On, Raised Face, Carbon Steel",
-          "optional": false
+          "description": "Slip-On, Raised Face, Carbon Steel"
         }
       ]
     }

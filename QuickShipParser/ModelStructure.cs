@@ -28,32 +28,36 @@ namespace QuickShipParser
             return JsonSerializer.Deserialize<ModelStructure>(jsonString, options) ?? throw new InvalidOperationException("Deserialization of the JSON string failed.");
         }
 
-        public class Element
+        public class Element : IPattern
         {
             public string CodeName { get; set; }
+            public bool Optional { get; set; }
             public List<CodeDescription> Codes { get; set; }
+
+            public IMatch Match(string text)
+            {
+                if (Optional)
+                {
+                    var pattern = new OptionalPattern(new Choice(Codes.ToArray()));
+                    return pattern.Match(text);
+                }
+                else
+                {
+                    var pattern = new Choice(Codes.ToArray());
+                    return pattern.Match(text);
+                }
+            }
         }
 
         public class CodeDescription : IPattern
         {
             public string Code { get; set; }
             public string Description { get; set; }
-            public bool Optional { get; set; }
 
             public IMatch Match(string text)
             {
-                if (Optional)
-                {
-                    var pattern = new OptionalPattern(new JsonText(Code));
-                    var match = pattern.Match(text);
-                    return new SuccessMatch(match.RemainingText());
-                }
-                else
-                {
-                    var pattern = new JsonText(Code);
-                    var match = pattern.Match(text);
-                    return new SuccessMatch(match.RemainingText());
-                }
+                var pattern = new JsonText(Code);
+                return pattern.Match(text);
             }
         }
     }
