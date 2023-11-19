@@ -21,10 +21,11 @@ Before you begin, ensure you have met the following requirements:
    ```sh
    git clone https://github.com/your-username/QuickShipParser.git
    cd QuickShipParser
+   ```
 
 2. **Configure Azure Storage**:
    - Set up a Blob container in your Azure Storage account.
-   - Obtain your storage account connection string and store it as an Azure Function configuration setting named 'quickship-az-fn-config-token'.
+   - Obtain your storage account connection string and store it as an Azure Function configuration setting named ```'quickship-az-fn-config-token'```.
 
 3. **Local Application Settings**:
    - Rename the `local.settings.json.example` file to `local.settings.json`.
