@@ -24,7 +24,8 @@ namespace QuickShipParser
             ILogger log)
         {
             Exception exception = null;
-            string model = req.Query["model"];
+
+            string? model = req.Query["model"];
 
             if (model == null)
             {
@@ -80,22 +81,22 @@ namespace QuickShipParser
             {
                 return new BadRequestObjectResult(
                     JsonConvert.SerializeObject(
-                        new ReturnStructure(model, result.Success(), result.RemainingText(), exception.Message)));
+                        new ReturnStructure(model, result?.Success(), result?.RemainingText(), exception.Message)));
             }
 
             return new OkObjectResult(
                 JsonConvert.SerializeObject(
-                    new ReturnStructure(model, result.Success(), result.RemainingText(), exception.Message)));
+                    new ReturnStructure(model, result?.Success(), result?.RemainingText())));
         }
 
         public class ReturnStructure
         {
-            public string ModelString { get; set; }
-            public bool QuickShipValid { get; set; }
-            public string QuickShipInvalidPart { get; set; }
+            public string? ModelString { get; set; }
+            public bool? QuickShipValid { get; set; }
+            public string? QuickShipInvalidPart { get; set; }
             public string ExceptionMessage { get; set; }
 
-            public ReturnStructure(string modelString, bool quickShipValid, string quickShipInvalidPart, string exceptionMessage)
+            public ReturnStructure(string? modelString, bool? quickShipValid, string? quickShipInvalidPart, string exceptionMessage = "None")
             {
                 ModelString = modelString;
                 QuickShipValid = quickShipValid;
