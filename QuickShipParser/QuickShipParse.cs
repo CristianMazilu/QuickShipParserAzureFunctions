@@ -88,7 +88,7 @@ namespace QuickShipParser
                     new ReturnStructure(model, result.Success(), result.RemainingText(), exception.Message)));
         }
 
-        private class ReturnStructure
+        public class ReturnStructure
         {
             public string ModelString { get; set; }
             public bool QuickShipValid { get; set; }
