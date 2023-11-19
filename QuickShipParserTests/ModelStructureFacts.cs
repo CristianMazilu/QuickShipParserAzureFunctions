@@ -268,7 +268,7 @@ namespace QuickShipParser.Facts
         public void ModelStructureMatch_ValidCodeNoOptionalOptions_ReturnsSuccess()
         {
             var modelStructure = SetUpModelStructure();
-            var modelString = "8705TSA010H";
+            var modelString = "8705TSA010HW0";
 
             var matchResult = modelStructure?.Match(modelString);
 
@@ -281,7 +281,7 @@ namespace QuickShipParser.Facts
         public void ModelStructureMatch_ValidCodeWithOneOptionalOption_ReturnsSuccess()
         {
             var modelStructure = SetUpModelStructure();
-            var modelString = "8705TSA010SH";
+            var modelString = "8705TSA010SHM0";
 
             var matchResult = modelStructure?.Match(modelString);
 
@@ -307,7 +307,7 @@ namespace QuickShipParser.Facts
         public void ModelStructureMatch_ValidCodeWithExtraCharacters_ReturnsFailure()
         {
             var modelStructure = SetUpModelStructure();
-            var modelString = "8705TSA010SHD";
+            var modelString = "8705TSA010SHM0D";
 
             var matchResult = modelStructure?.Match(modelString);
 

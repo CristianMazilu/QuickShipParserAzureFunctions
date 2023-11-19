@@ -107,6 +107,150 @@
           "description": "Slip-On, Raised Face, Carbon Steel"
         }
       ]
+    },
+    {
+      "codeName": "Housing Configuration",
+      "optional": false,
+      "codes": [
+        {
+          "code": "W0",
+          "description": "Sealed, Welded Housing with Legacy Terminal Block (Ordinary Locations only)"
+        },
+        {
+          "code": "M0",
+          "description": "Sealed. Welded Housing with Field Replaceable Terminal Block"
+        }
+      ]
+    },
+    {
+      "codeName": "Safety Approval",
+      "optional": true,
+      "codes": [
+        {
+          "code": "K1",
+          "description": "Safety Approval: ATEX Increased Safety with Intrinsically Safe Electrodes; ATEX Dust"
+        },
+        {
+          "code": "ND",
+          "description": "ATEX Dust"
+        },
+        {
+          "code": "N1",
+          "description": "Sealed, Welded Housing with Legacy Terminal Block (Ordinary Locations only)"
+        },
+        {
+          "code": "NF",
+          "description": "IECEx Dust"
+        },
+        {
+          "code": "N7",
+          "description": "IECEx Non-Sparking with Intrinsically Safe Electrodes; IECEx Dust"
+        },
+        {
+          "code": "K7",
+          "description": "IECEx Increased Safety with Intrinsically Safe Electrodes; IECEx Dust"
+        },
+        {
+          "code": "N5",
+          "description": "FM Non-Incentive with I.S. Electrodes, Class I Div 2; DIP"
+        },
+        {
+          "code": "K5",
+          "description": "FM Explosion-Proof with I.S. Electrodes, Class I Div 1; DIP"
+        },
+        {
+          "code": "N6",
+          "description": "CSA (C/US) Non-Incentive with Intrinsically Safe Electrodes, Class I Div 2; DIP"
+        },
+        {
+          "code": "K6",
+          "description": "CSA (C) Increased Safety with Intrinsically Safe Electrodes; DIP"
+        },
+        {
+          "code": "KU",
+          "description": "CSA (US) Explosion-Proof with Intrinsically Safe Electrodes, Class I Dive 1; DIP"
+        },
+        {
+          "code": "N8",
+          "description": "EAC Non-Sparking with Intrinsically Safe Electrodes; EAC Dust"
+        },
+        {
+          "code": "NO",
+          "description": "FM and CSA Non-Incendive, Class I Div 2 for Non-Flammable Fluids; DIP"
+        },
+        {
+          "code": "K8",
+          "description": "EAC Increased Safety with Intrinsically Safe Electrodes; EAC Dust"
+        }
+      ]
+    },
+    {
+      "codeName": "Option: Mounting Configuration",
+      "optional": true,
+      "codes": [
+        {
+          "code": "B3",
+          "description": "Integral Mount with Rosemount 8732E Transmitter"
+        }
+      ]
+    },
+    {
+      "codeName": "Option: Conduit Entry",
+      "optional": true,
+      "codes": [
+        {
+          "code": "J1",
+          "description": "M20 Conduit Entries (valid only with Remote mount, otherwise 1⁄2” NPT will be standard)"
+        }
+      ]
+    },
+    {
+      "codeName": "Quality Certifications",
+      "optional": true,
+      "codes": [
+        {
+          "code": "Q4",
+          "description": "Calibration Certificate per ISO 10474 3.1B/ EN 10204 3.1"
+        },
+        {
+          "code": "Q8",
+          "description": "Material Traceability per ISO 10474 3.1B/ EN 10204 3.1"
+        },
+        {
+          "code": "Q9",
+          "description": "Material Traceability Electrode Only per ISO 10474 3.1B / EN 10204 3.1"
+        },
+        {
+          "code": "Q66",
+          "description": "Welding Procedure Qualification Record Documentation (PQR)"
+        },
+        {
+          "code": "Q67",
+          "description": "Welder Performance Qualification Record Documentation (WPQ)"
+        },
+        {
+          "code": "Q68",
+          "description": "Welding Procedure Specifications (WPS)"
+        },
+        {
+          "code": "Q70",
+          "description": "Inspection Certificate Weld Examination per ISO 10474 3.1B"
+        },
+        {
+          "code": "Q76",
+          "description": "Positive Material Identification(PMI) on Flange and Pipe per ASTM E1476-97"
+        }
+      ]
+    },
+    {
+      "codeName": "Option: PED",
+      "optional": true,
+      "codes": [
+        {
+          "code": "PD",
+          "description": "Pressure Equipment Directive (PED, per 97/23/EC)"
+        }
+      ]
     }
   ]
 }
