@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Azure.Storage.Blobs.Models;
 using Azure.Storage.Blobs;
 using System.Collections.Generic;
+using Azure;
 
 namespace QuickShipParser
 {
@@ -22,49 +23,85 @@ namespace QuickShipParser
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
-
+            Exception exception = null;
             string model = req.Query["model"];
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            model = model ?? data?.model;
-
-            // Create a Blob Service Client
-            string connectionString = Environment.GetEnvironmentVariable("quickship-az-fn-config-token");
-            BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-
-            // Access the container
-            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(BlobContainerName);
-
-            // Get all the *.json files content and store it in a list of strings
-            List<string> jsonFileContents = new List<string>();
-            await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
+            if (model == null)
             {
-                if (Path.GetExtension(blobItem.Name).Equals(".json", StringComparison.OrdinalIgnoreCase))
-                {
-                    BlobClient blobClient = containerClient.GetBlobClient(blobItem.Name);
-                    BlobDownloadInfo download = await blobClient.DownloadAsync();
-                    using (StreamReader reader = new StreamReader(download.Content))
-                    {
-                        jsonFileContents.Add(await reader.ReadToEndAsync());
-                    }
-                }
+                var errorResponse = new ReturnStructure(null, false, null, "Model parameter is missing.");
+                return new BadRequestObjectResult(JsonConvert.SerializeObject(errorResponse));
             }
 
             IMatch result = new FailedMatch("Base model not found.");
-            foreach (var jsonContent in jsonFileContents)
-            {
-                var modelStructure = ModelStructure.FromJson(jsonContent);
 
-                result = modelStructure.Match(model);
+            try
+            {
+                log.LogInformation("C# HTTP trigger function processed a request.");
+
+                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                dynamic data = JsonConvert.DeserializeObject(requestBody);
+                model = model ?? data?.model;
+
+                // Create a Blob Service Client
+                string connectionString = Environment.GetEnvironmentVariable("quickship-az-fn-config-token");
+                BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+
+                // Access the container
+                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(BlobContainerName);
+
+                // Get all the *.json files content and store it in a list of strings
+                List<string> jsonFileContents = new List<string>();
+                await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
+                {
+                    if (Path.GetExtension(blobItem.Name).Equals(".json", StringComparison.OrdinalIgnoreCase))
+                    {
+                        BlobClient blobClient = containerClient.GetBlobClient(blobItem.Name);
+                        BlobDownloadInfo download = await blobClient.DownloadAsync();
+                        using (StreamReader reader = new StreamReader(download.Content))
+                        {
+                            jsonFileContents.Add(await reader.ReadToEndAsync());
+                        }
+                    }
+                }
+
+                foreach (var jsonContent in jsonFileContents)
+                {
+                    var modelStructure = ModelStructure.FromJson(jsonContent);
+
+                    result = modelStructure.Match(model);
+                }
+            }
+            catch (Exception ex)
+            {
+                exception = ex;
             }
 
-            string responseMessage = string.IsNullOrEmpty(model)
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Model string {model} is {result.Success()}. Error is in the following part of the string: {result.RemainingText()}";
+            if (exception != null)
+            {
+                return new BadRequestObjectResult(
+                    JsonConvert.SerializeObject(
+                        new ReturnStructure(model, result.Success(), result.RemainingText(), exception.Message)));
+            }
 
-            return new OkObjectResult(responseMessage);
+            return new OkObjectResult(
+                JsonConvert.SerializeObject(
+                    new ReturnStructure(model, result.Success(), result.RemainingText(), exception.Message)));
+        }
+
+        private class ReturnStructure
+        {
+            public string ModelString { get; set; }
+            public bool QuickShipValid { get; set; }
+            public string QuickShipInvalidPart { get; set; }
+            public string ExceptionMessage { get; set; }
+
+            public ReturnStructure(string modelString, bool quickShipValid, string quickShipInvalidPart, string exceptionMessage)
+            {
+                ModelString = modelString;
+                QuickShipValid = quickShipValid;
+                QuickShipInvalidPart = quickShipInvalidPart;
+                ExceptionMessage = exceptionMessage;
+            }
         }
     }
 }
