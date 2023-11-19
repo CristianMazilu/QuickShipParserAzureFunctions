@@ -45,7 +45,7 @@ namespace QuickShipParser
             {
                 if (Optional)
                 {
-                    var pattern = new OptionalPattern(new Choice(Codes.ToArray()));
+                    var pattern = new Many(new Choice(Codes.ToArray()));
                     return pattern.Match(text);
                 }
                 else

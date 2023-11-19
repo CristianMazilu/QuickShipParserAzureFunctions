@@ -294,13 +294,13 @@ namespace QuickShipParser.Facts
         public void ModelStructureMatch_ValidCodeWithTwoOptionalOptions_ReturnsFailure()
         {
             var modelStructure = SetUpModelStructure();
-            var modelString = "8705TSA010SPH";
+            var modelString = "8705TSA010SPHW0";
 
             var matchResult = modelStructure?.Match(modelString);
 
             Assert.IsNotNull(matchResult);
-            Assert.IsFalse(matchResult.Success());
-            Assert.AreEqual("8705TSA010SPH", matchResult.RemainingText());
+            Assert.IsTrue(matchResult.Success());
+            Assert.AreEqual("", matchResult.RemainingText());
         }
 
         [TestMethod]
@@ -327,6 +327,32 @@ namespace QuickShipParser.Facts
             Assert.IsNotNull(matchResult);
             Assert.IsFalse(matchResult.Success());
             Assert.AreEqual("8705STA010SH", matchResult.RemainingText());
+        }
+
+        [TestMethod]
+        public void ModelStructureMatch_ValidCodeWithMultipleOptionalOptions_ReturnsSuccess()
+        {
+            var modelStructure = SetUpModelStructure();
+            var modelString = "8705TSA010SPHW0Q4Q9Q66PD";
+
+            var matchResult = modelStructure?.Match(modelString);
+
+            Assert.IsNotNull(matchResult);
+            Assert.IsTrue(matchResult.Success());
+            Assert.AreEqual("", matchResult.RemainingText());
+        }
+
+        [TestMethod]
+        public void ModelStructureMatch_ValidCodeWithMultipleOptionalOptionsWrongOrder_ReturnsSuccess()
+        {
+            var modelStructure = SetUpModelStructure();
+            var modelString = "8705TSA010SPHW0Q9Q4Q66PD";
+
+            var matchResult = modelStructure?.Match(modelString);
+
+            Assert.IsNotNull(matchResult);
+            Assert.IsTrue(matchResult.Success());
+            Assert.AreEqual("", matchResult.RemainingText());
         }
     }
 }
