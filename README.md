@@ -74,6 +74,7 @@ public class Element : IPattern
 }
 [...]
 ```
+Right now, the project is accessible live at: [QuickShipParserAPI](https://quickshipparser20231118174958.azurewebsites.net/api/QuickShipParse?model=8705TSA010SPHW0Q4Q9Q66PD). Play around with some model strings: 8705TSA010SPHW0Q9Q4Q66PD (valid), 8705TSA010SPHW0 (valid), 8705STA010SH (invalid).
 
 ## Working principle
 At the heart of this project lies the business logic JSON file. Let's take Emerson's Rosemount 8705 Flanged Magnetic Flow Meter for example:
