@@ -19,6 +19,8 @@ Before you begin, ensure you have met the following requirements:
 ## Usage
 After deployment, the Azure Function can be triggered via HTTP requests. The function expects a query parameter `model`.
 
+Right now, the project is accessible live at: [QuickShipParserAPI](https://quickshipparser20231118174958.azurewebsites.net/api/QuickShipParse?model=8705TSA010SPHW0Q4Q9Q66PD). Play around with some model strings: 8705TSA010SPHW0Q9Q4Q66PD (valid), 8705TSA010SPHW0 (valid), 8705STA010SH (invalid).
+
 Example HTTP request:
 ```
 POST https://[your-app-name].azurewebsites.net/api/QuickShipParse?model=[your-model-string])
@@ -74,7 +76,6 @@ public class Element : IPattern
 }
 [...]
 ```
-Right now, the project is accessible live at: [QuickShipParserAPI](https://quickshipparser20231118174958.azurewebsites.net/api/QuickShipParse?model=8705TSA010SPHW0Q4Q9Q66PD). Play around with some model strings: 8705TSA010SPHW0Q9Q4Q66PD (valid), 8705TSA010SPHW0 (valid), 8705STA010SH (invalid).
 
 ## Working principle
 At the heart of this project lies the business logic JSON file. Let's take Emerson's Rosemount 8705 Flanged Magnetic Flow Meter for example:
