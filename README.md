@@ -19,7 +19,7 @@ Before you begin, ensure you have met the following requirements:
 ## Setup and Installation
 1. **Clone the Repository**:
    ```sh
-   git clone https://github.com/your-username/QuickShipParser.git
+   git clone https://github.com/CristianMazilu/QuickShipParser.git
    cd QuickShipParser
    ```
 
@@ -37,30 +37,98 @@ Before you begin, ensure you have met the following requirements:
 ## Usage
 After deployment, the Azure Function can be triggered via HTTP requests. The function expects a query parameter `model`.
 
-Example HTTP request (Live right now, go test it!):
+Example HTTP request:
 ```
-POST [/api/QuickShipParse?model=8705TSA010SPHW0Q9Q4Q66PD](https://quickshipparser20231118174958.azurewebsites.net/api/QuickShipParse?model=8705459)
+POST https://[your-app-name].azurewebsites.net/api/QuickShipParse?model=[your-model-string])
 Content-Type: application/json
-
+```
+Example HTTP response (valid model string):
+```
+Response Status: 200 OK
+Response Body:
 {
-  "model": "model-name"
+  "ModelString": "[your-model-here]",
+  "QuickShipValid": true,
+  "QuickShipInvalidPart": "",
+  "ExceptionMessage": "None"
 }
 ```
+Example HTTP response (invalid model string):
+```
+Response Status: 200 OK
+Response Body:
+{
+  "ModelString": "[your-model-here]",
+  "QuickShipValid": false,
+  "QuickShipInvalidPart": "[invalid-part-of-model-string]",
+  "ExceptionMessage": "None"
+}
+```
+## Working principle
+At the heart of this project lies the business logic JSON file. Let's take Emerson's Rosemount 8705 Flanged Magnetic Flow Meter for example:
+```
+{
+  "modelName": "Mag meters",
+  "baseModel": "8705",
+  "elements": [
+    {
+      "codeName": "Base",
+      "optional": false,
+      "codes": [
+        {
+          "code": "8705",
+          "description": "Magnetic Flowmeter Sensor - Flanged"
+        }
+      ]
+    },
+[...]
+    {
+      "codeName": "Line Size",
+      "optional": false,
+      "codes": [
+        {
+          "code": "010",
+          "description": "1 inch (25 mm)"
+        },
+        {
+          "code": "015",
+          "description": "1.5 inch (40 mm)"
+        }
+      ]
+    },
+[...]
+    {
+     "codeName": "Quality Certifications",
+     "optional": true,
+     "codes": [
+       {
+         "code": "Q4",
+         "description": "Calibration Certificate per ISO 10474 3.1B/ EN 10204 3.1"
+       },
+       {
+         "code": "Q8",
+         "description": "Material Traceability per ISO 10474 3.1B/ EN 10204 3.1"
+       },
+       {
+         "code": "Q9",
+         "description": "Material Traceability Electrode Only per ISO 10474 3.1B / EN 10204 3.1"
+       },
+       {
+         "code": "Q66",
+         "description": "Welding Procedure Qualification Record Documentation (PQR)"
+       },
+     ]
+   },
+  ]
+}
+```
+This (partial) JSON file allows validation of models such as ```8705TSA010SPHW0``` or ```8705TSA010SPHW0Q4Q9Q66PD```, while invalidating any incorrect configurations, or model configurations that are not available for QuickShip.
 
 ## Contributing
-Contributions to the QuickShipParser project are welcome. Please adhere to the following guidelines:
-- Fork the repository and create a new branch for your feature or fix.
-- Write clear and descriptive commit messages.
-- Ensure code style and quality compliance.
-- Create a pull request with a detailed description of changes.
+QuickShipParser is not ready for open source contributions, but feel free to clone this repo and use the codebase in your own project!
 
 ## License
 [MIT License](LICENSE) - See the LICENSE file for details.
 
 ## Contact
-For any questions or comments, please contact [Your Name] at [Your Email].
-
----
-
-Note: Don't forget to replace placeholders like `[Your Name]`, `[Your Email]`, `your-username`, and any specific instructions or URLs with your actual project information and links.
-```
+For any questions or comments, please contact Cristian Mazilu at mazilu6@gmail.com.
