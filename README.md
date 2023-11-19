@@ -1,4 +1,3 @@
-```
 # QuickShipParser
 
 ## Overview
@@ -22,7 +21,6 @@ Before you begin, ensure you have met the following requirements:
    ```sh
    git clone https://github.com/your-username/QuickShipParser.git
    cd QuickShipParser
-   ```
 
 2. **Configure Azure Storage**:
    - Set up a Blob container in your Azure Storage account.
