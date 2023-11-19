@@ -52,13 +52,12 @@ namespace QuickShipParser
                 }
             }
 
-            IMatch result = new FailedMatch("not found");
+            IMatch result = new FailedMatch("Base model not found.");
             foreach (var jsonContent in jsonFileContents)
             {
                 var modelStructure = ModelStructure.FromJson(jsonContent);
-                var modelParser = new ModelParser(modelStructure);
 
-                result = modelParser.Match(model);
+                result = modelStructure.Match(model);
             }
 
             string responseMessage = string.IsNullOrEmpty(model)
