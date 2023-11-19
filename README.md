@@ -156,8 +156,5 @@ This (partial) JSON file allows validation of models such as ```8705TSA010SPHW0`
 ## Contributing
 QuickShipParser is not ready for open source contributions, but feel free to clone this repo and use the codebase in your own project!
 
-## License
-[MIT License](LICENSE) - See the LICENSE file for details.
-
 ## Contact
 For any questions or comments, please contact Cristian Mazilu at mazilu6@gmail.com.
