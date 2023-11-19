@@ -153,8 +153,5 @@ This (partial) JSON file allows validation of models such as ```8705TSA010SPHW0`
 4. **Deploy to Azure**:
    - Deploy the function app to Azure using [Visual Studio](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs), [VS Code](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code), or the [Azure CLI](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function-azure-cli).
 
-## Contributing
-QuickShipParser is not ready for open source contributions, but feel free to clone this repo and use the codebase in your own project!
-
 ## Contact
 For any questions or comments, please contact Cristian Mazilu at mazilu6@gmail.com.
