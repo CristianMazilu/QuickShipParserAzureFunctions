@@ -251,7 +251,7 @@ namespace QuickShipParser.Facts
         }
 
         [TestMethod]
-        public void CodeDescriptionMatch_ValidCodeWithDescriptionWithRemaininTextNoOption_OptionalTrue_ReturnsSuccess()
+        public void CodeDescriptionMatch_ValidCodeWithDescriptionWithRemaininTextNoOption_OptionalTrue_ReturnsFailure()
         {
             var modelStructure = SetUpModelStructure();
             var element = modelStructure.Elements.FirstOrDefault(e => e.CodeName == "Flange Type and Material");
@@ -262,6 +262,71 @@ namespace QuickShipParser.Facts
             Assert.IsNotNull(matchResult);
             Assert.IsFalse(matchResult.Success());
             Assert.AreEqual("02023", matchResult.RemainingText());
+        }
+
+        [TestMethod]
+        public void ModelStructureMatch_ValidCodeNoOptionalOptions_ReturnsSuccess()
+        {
+            var modelStructure = SetUpModelStructure();
+            var modelString = "8705TSA010H";
+
+            var matchResult = modelStructure?.Match(modelString);
+
+            Assert.IsNotNull(matchResult);
+            Assert.IsTrue(matchResult.Success());
+            Assert.AreEqual("", matchResult.RemainingText());
+        }
+
+        [TestMethod]
+        public void ModelStructureMatch_ValidCodeWithOneOptionalOption_ReturnsSuccess()
+        {
+            var modelStructure = SetUpModelStructure();
+            var modelString = "8705TSA010SH";
+
+            var matchResult = modelStructure?.Match(modelString);
+
+            Assert.IsNotNull(matchResult);
+            Assert.IsTrue(matchResult.Success());
+            Assert.AreEqual("", matchResult.RemainingText());
+        }
+
+        [TestMethod]
+        public void ModelStructureMatch_ValidCodeWithTwoOptionalOptions_ReturnsFailure()
+        {
+            var modelStructure = SetUpModelStructure();
+            var modelString = "8705TSA010SPH";
+
+            var matchResult = modelStructure?.Match(modelString);
+
+            Assert.IsNotNull(matchResult);
+            Assert.IsFalse(matchResult.Success());
+            Assert.AreEqual("8705TSA010SPH", matchResult.RemainingText());
+        }
+
+        [TestMethod]
+        public void ModelStructureMatch_ValidCodeWithExtraCharacters_ReturnsFailure()
+        {
+            var modelStructure = SetUpModelStructure();
+            var modelString = "8705TSA010SHD";
+
+            var matchResult = modelStructure?.Match(modelString);
+
+            Assert.IsNotNull(matchResult);
+            Assert.IsFalse(matchResult.Success());
+            Assert.AreEqual("D", matchResult.RemainingText());
+        }
+
+        [TestMethod]
+        public void ModelStructureMatch_InvalidCodeWrongOrder_ReturnsFailure()
+        {
+            var modelStructure = SetUpModelStructure();
+            var modelString = "8705STA010SH";
+
+            var matchResult = modelStructure?.Match(modelString);
+
+            Assert.IsNotNull(matchResult);
+            Assert.IsFalse(matchResult.Success());
+            Assert.AreEqual("8705STA010SH", matchResult.RemainingText());
         }
     }
 }

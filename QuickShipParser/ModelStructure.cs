@@ -5,11 +5,11 @@ using System.Text.Json.Serialization;
 
 namespace QuickShipParser
 {
-    public class ModelStructure
+    public class ModelStructure : IPattern
     {
         public string ModelName { get; set; }
         public string BaseModel { get; set; }
-        public List<Element> Elements { get; set; }
+        public Element[] Elements { get; set; }
 
         // Static method to handle the deserialization
         public static ModelStructure FromJson(string jsonString)
@@ -26,6 +26,13 @@ namespace QuickShipParser
             };
 
             return JsonSerializer.Deserialize<ModelStructure>(jsonString, options) ?? throw new InvalidOperationException("Deserialization of the JSON string failed.");
+        }
+
+        public IMatch Match(string text)
+        {
+            var pattern = new Sequence(Elements);
+            var result = pattern.Match(text);
+            return result.RemainingText() == "" ? result : new FailedMatch(result.RemainingText());
         }
 
         public class Element : IPattern
