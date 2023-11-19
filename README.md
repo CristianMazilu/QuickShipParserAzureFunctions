@@ -1,5 +1,7 @@
 # QuickShipParser
 
+![API Status](https://img.shields.io/badge/API-Live-brightgreen) Test it [here](https://quickshipparser20231118174958.azurewebsites.net/api/QuickShipParse?model=8705TSA010SPHW0)!
+
 ## Overview
 QuickShipParser is an Azure Function-based project designed to validate product model strings based on specific business rules. In this case, it validates models that are available for QuickShip.
 
