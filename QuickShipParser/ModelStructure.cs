@@ -31,7 +31,6 @@ namespace QuickShipParser
         public class Element
         {
             public string CodeName { get; set; }
-            public int Length { get; set; }
             public List<CodeDescription> Codes { get; set; }
         }
 
@@ -39,6 +38,7 @@ namespace QuickShipParser
         {
             public string Code { get; set; }
             public string Description { get; set; }
+            public bool Optional { get; set; }
         }
     }
 }

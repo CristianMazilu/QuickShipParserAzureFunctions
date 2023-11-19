@@ -4,75 +4,81 @@
   "elements": [
     {
       "codeName": "Base",
-      "length": 4,
       "codes": [
         {
           "code": "8705",
-          "description": "Magnetic Flowmeter Sensor - Flanged"
+          "description": "Magnetic Flowmeter Sensor - Flanged",
+          "optional": false
         }
       ]
     },
     {
       "codeName": "Lining Material",
-      "length": 1,
       "codes": [
         {
           "code": "T",
-          "description": "PTFE"
+          "description": "PTFE",
+          "optional": false
         }
       ]
     },
     {
       "codeName": "Electrode Material",
-      "length": 1,
       "codes": [
         {
           "code": "S",
-          "description": "316L Stainless Steel"
+          "description": "316L Stainless Steel",
+          "optional": false
         },
         {
           "code": "H",
-          "description": "Nickel Alloy 276 (UNS N10276)"
+          "description": "Nickel Alloy 276 (UNS N10276)",
+          "optional": false
         }
       ]
     },
     {
       "codeName": "Electrode Type",
-      "length": 1,
       "codes": [
         {
           "code": "A",
-          "description": "2 Measurement electrodes - Standard"
+          "description": "2 Measurement electrodes - Standard",
+          "optional": false
         },
         {
           "code": "E",
-          "description": "2 Measurement plus 1 Grounding Electrode - Standard"
+          "description": "2 Measurement plus 1 Grounding Electrode - Standard",
+          "optional": false
         }
       ]
     },
     {
       "codeName": "Line Size",
-      "length": 3,
       "codes": [
         {
           "code": "010",
-          "description": "1 inch (25 mm)"
+          "description": "1 inch (25 mm)",
+          "optional": false
         },
         {
           "code": "015",
-          "description": "1.5 inch (40 mm)"
+          "description": "1.5 inch (40 mm)",
+          "optional": false
         },
         {
           "code": "020",
-          "description": "2 inch (50 mm)"
+          "description": "2 inch (50 mm)",
+          "optional": false
         },
         {
           "code": "030",
-          "description": "3 inch (80 mm)"
+          "description": "3 inch (80 mm)",
+          "optional": false
         },
         {
           "code": "040",
-          "description": "4 inch (100 mm)"
+          "description": "4 inch (100 mm)",
+          "optional": false
         }
       ]
     }

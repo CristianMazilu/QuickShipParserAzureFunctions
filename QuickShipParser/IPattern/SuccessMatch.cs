@@ -2,11 +2,11 @@
 {
     internal class SuccessMatch : IMatch
     {
-        private readonly string? _text;
+        private readonly string _text;
 
-        public SuccessMatch(string? text)
+        public SuccessMatch(string text)
         {
-            this._text = text;
+            _text = text;
         }
 
         public bool Success()
@@ -14,9 +14,9 @@
             return true;
         }
 
-        public string? RemainingText()
+        public string RemainingText()
         {
-            return this._text;
+            return _text;
         }
     }
 }

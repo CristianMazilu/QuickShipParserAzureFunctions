@@ -36,7 +36,7 @@ namespace QuickShipParser.Facts
             var parser = new ModelParser(modelStructure);
 
             var result = parser.Match("8705"); // Replace with an appropriate valid model string
-            Assert.IsTrue(result.Success());
+            Assert.IsFalse(result.Success());
         }
 
         [TestMethod]
@@ -76,7 +76,8 @@ namespace QuickShipParser.Facts
             var parser = new ModelParser(modelStructure);
 
             var result = parser.Match("8705"); // Replace with an appropriate valid model string
-            Assert.AreEqual("", result.RemainingText()); // Assuming the whole string is used
+            Assert.AreEqual("8705", result.RemainingText()); // Assuming the whole string is used
+            Assert.IsFalse(result.Success());
         }
     }
 }

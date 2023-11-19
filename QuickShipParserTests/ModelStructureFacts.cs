@@ -54,7 +54,6 @@ namespace QuickShipParser.Facts
             var element = model.Elements.FirstOrDefault();
             Assert.IsNotNull(element);
             Assert.AreEqual("Base", element.CodeName);
-            Assert.AreEqual(4, element.Length);
         }
 
         [TestMethod]
